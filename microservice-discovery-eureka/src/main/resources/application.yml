@@ -1,0 +1,14 @@
+security:
+  basic:
+    enabled: true
+  user:
+    name: user
+    password: password123
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka  #这里的user 跟上面的name值必须一致，还有passwoord也一样，#服务注册中心的配置内容，指定服务注册中心的位置

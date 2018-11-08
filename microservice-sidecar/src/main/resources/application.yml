@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: microservice-sidecar
+server:
+  port: 8070
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+sidecar:
+  port: 8060 #指的是服务端的端口，也就是要请求的其他端的端口，比如PHP
+  health-uri: http://localhost:8060/health.json

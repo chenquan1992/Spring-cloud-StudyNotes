@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: EUREKA-HA
+---  #使用这个标识将配置文件分为多个部分，edit configurations 中设置active profiles的名字 ，然后可以运行那一部分的配置
+server:
+  port: 8761
+spring:
+  profiles: peer1   #设置Profiles的名字
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:8762/eureka/,http://peer3:8763/eureka/
+
+
+---
+server:
+  port: 8762
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/,http://peer3:8763/eureka/
+
+---
+server:
+  port: 8763
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+
+
+# eureka 的配置，注册多个eureka的服务，防止down机，然后各自的eureka相互注册

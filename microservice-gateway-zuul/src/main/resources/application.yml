@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: microservice-gateway-zuul
+server:
+  port: 8040
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true #设置这个表示可以使用localhost进行访问，没设置true则是默认的id（不知道怎么形容）
+zuul:
+  ignoredServices: microservice-consumer-movie-ribbon-with-hystrix #忽略反向代理，就是不能使用下面的方向代理，就是下面的写法无效
+  routes:
+    microservice-provider-user: /user/** #反向代理简写路径
+
+#使用反向代理：只要使用反向代理的路径 + 微服务的id（microservice-provider-user）+ 请求的路径 就可以访问到
+#例子：http://192.168.3.78:8040（反向代理的路径：zuul服务）/microservice-provider-user（微服务的id）/simple/1（请求的路径）
+#      http://192.168.3.78:8040/microservice-provider-user/simple/1     忽略了就不能这样用了
+
+#微服务的id ：就是注册到eureka的id
+    

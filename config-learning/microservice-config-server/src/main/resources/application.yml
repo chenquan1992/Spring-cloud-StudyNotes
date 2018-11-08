@@ -1,0 +1,11 @@
+server:
+  port: 8082
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git.oschina.net/it-much/config-repo-51cto-video
+
+#http://localhost:8082/foobar-dev.yml 就可以请求到远程的配置
+

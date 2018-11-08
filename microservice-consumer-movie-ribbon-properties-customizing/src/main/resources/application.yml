@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: microservice-consumer-movie-ribbon-properties-customizing
+server:
+  port: 8010
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+microservice-provider-user: #ribbon自定义负载均衡规则，这个是要请求的微服务的名称id
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #这是定义规则了
